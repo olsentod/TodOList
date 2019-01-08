@@ -1,0 +1,50 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Todo List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" href="include/css/all.min.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+    <script src="dist/main.js"></script>
+</head>
+
+<body>
+    <div id="divContent">
+        <div id="reminderListContainer" class="focused">
+            <header>
+                <div id="btn-settings" class="btn" title="Change Settings"><span><i class="fal fa-cog"></i></span></div>
+                <div id="btn-show" class="btn" title="Show/Hide Dismissed Items"><span><i class="fal fa-eye-slash"></i><i
+                            class="fal fa-eye"></i></span></div>
+                <div id="btn-dismiss" class="btn active" title="Dismiss Selected Items"><span><i class="fal fa-check"></i></span></div>
+                <div id="btn-enable" class="btn" title="Enable Selected Items"><span><i class="fal fa-check"></i></span></div>
+                <div id="btn-delete" class="btn" title="Delete Selected Items"><span><i class="fal fa-trash"></i></span></div>
+                <div id="btn-add" class="btn"><span><i class="fal fa-plus"></i></span></div>
+            </header>
+            <div id="filterContainer">
+                <div id="filterDesc"><h2 class="active">Active Items</h2><h2 class="dismissed">Dismissed Items</h2></div>
+                <div id="filterOptions" class='date'><p id="filterDate">showing by Date</p><p id="filterTitle">showing A - Z</p><span class="caretContainer"><i class="fas fa-caret-up"></i><i class="fas fa-caret-down"></i></span>
+
+                </div>
+                <div id="checkboxActive" class="checkbox">
+                    <span><i class="fal fa-check"></i></span>
+                </div>
+                <div id="checkboxDismiss" class="checkbox">
+                    <span><i class="fal fa-check"></i></span>
+                </div>
+            </div>
+            <div id="reminderList">
+
+            </div>
+        </div>
+        <div id="noteContainer"></div>
+        <div id="backToList"><i class="fas fa-angle-double-left fa-2x"></i></div>
+    </div>
+</body>
+
+</html>

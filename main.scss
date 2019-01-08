@@ -1,0 +1,647 @@
+//Reset
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+textarea {
+    margin: 0px;
+    // font-family: 'Open Sans', sans-serif;
+    // font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+    margin: 0px;
+    background-color: #e3e3e3;
+    padding: 10px;
+}
+
+#divContent {
+    display: flex;
+    height: 100%;
+}
+
+#reminderListContainer {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc((1/3)*100%);
+    background-color: white;
+    padding: 20px;
+    border-right: 20px solid #e3e3e3;
+
+    header {
+        display: flex;
+        height: 77px;
+        margin-bottom: 10px;
+
+        h2 {
+            display: flex;
+            align-self: center;
+            flex-basis: 80%;
+            padding: 20px;
+        }
+
+        .btn {
+            display: flex;
+            align-self: stretch;
+            justify-content: center;
+            margin-right: 2px;
+
+            flex-basis: calc((1/5)*100%);
+            font-size: 1.1rem;
+            cursor: pointer;
+
+            &:last-child {
+                margin-right: 0px;
+            }
+
+            span {
+                align-self: center;
+            }
+        }
+
+        #btn-settings{
+            border: 1px solid #e3e3e3;
+
+            &:hover{
+                background-color: #efefef;
+            }
+        }
+
+        #btn-show {
+            background-color: black;
+            color: white;
+
+            &:hover {
+                background-color: #4a4a4a;
+            }
+
+            .fa-eye-slash {
+                display: none;
+            }
+
+            &.showDismissed {
+                .fa-eye-slash {
+                    display: initial;
+                }
+
+                .fa-eye {
+                    display: none;
+                }
+            }
+        }
+
+        #btn-dismiss {
+            background-color: #007bff;
+            color: white;
+            display: none;
+
+            &:hover {
+                background-color: #4da3ff;
+            }
+
+            &.active {
+                display: flex;
+            }
+        }
+
+        #btn-enable {
+            background-color: #28a745;
+            color: white;
+            display: none;
+
+            &:hover {
+                background-color: #4e9f61;
+            }
+
+            &.active {
+                display: flex;
+            }
+        }
+
+        #btn-delete {
+            background-color: #dc3545;
+            color: white;
+
+            &:hover {
+                background-color: #d65360;
+            }
+        }
+
+        #btn-add {
+            background-color: #e3e3e3;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #efefef;
+            }
+
+            span {
+                font-size: 1.5rem;
+            }
+        }
+
+    }
+
+    #filterContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        padding-right: 0px;
+        border-bottom: 2px solid #e3e3e3;
+        margin-bottom: 5px;
+
+        #filterDesc {
+            flex-grow: 1;
+
+            .active {
+                display: flex;
+            }
+
+            .dismissed {
+                display: none;
+            }
+        }
+
+        &.showDismissed {
+            #filterDesc {
+                .active {
+                    display: none;
+                }
+
+                .dismissed {
+                    display: flex;
+                }
+            }
+
+            #checkboxActive{
+                display: none;
+            }
+
+            #checkboxDismiss{
+                display: flex;
+            }
+        }
+
+        #filterOptions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 0px 10px;
+            margin-right: 10px;
+            cursor: pointer;
+
+            #filterDate{
+                display: none;
+
+            }
+
+            #filterTitle{
+                display: flex;
+            }
+
+            &.date{
+                #filterDate{
+                    display: flex;
+    
+                }
+    
+                #filterTitle{
+                    display: none;
+                }
+            }
+        }
+
+        .caretContainer {
+            display: flex;
+            flex-direction: column;
+            margin-left: 4px;
+
+            >i {
+                line-height: 0.5;
+            }
+
+        }
+
+        #checkboxActive, #checkboxDismiss {
+            display: flex;
+            justify-content: flex-end;
+            cursor: pointer;
+        }
+
+        #checkboxDismiss{
+            display: none;
+        }
+    }
+
+    #reminderList {
+        overflow-x: hidden;
+        overflow-y: auto;
+        flex-basis: 100%;
+
+
+        div.reminder {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            .desc {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 10px;
+                flex-grow: 1;
+                margin-right: 10px;
+
+                h3 {
+                    display: flex;
+                    flex-grow: 1;
+                    word-break: break-word;
+                }
+
+                p {
+                    display: flex;
+                    margin-left: 10px;
+
+                    &.safe{
+                        //color: blue;
+                    }
+                    &.caution{
+                        color: #ff9400;
+                    }
+                    &.warning{
+                        color: #dc3545;
+                    }
+
+                }
+
+                &:hover {
+                    background-color: #e3e3e3;
+                }
+            }
+
+            &.active {
+                .desc {
+                    background-color: #e3e3e3;
+                }
+            }
+        }
+
+        div.reminder.dismissed {
+            display: none;
+        }
+
+        &.showDismissed {
+            div.reminder.dismissed {
+                display: flex;
+            }
+
+            div.reminder:not(.dismissed) {
+                display: none;
+            }
+        }
+    }
+
+    .checkbox {
+        display: flex;
+        flex-basis: 22px;
+        justify-content: center;
+        align-self: stretch;
+
+
+        span {
+            display: flex;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+            height: 22px;
+            width: 22px;
+            background-color: #e3e3e3;
+        }
+
+        .fa-check {
+            display: none;
+        }
+
+        &.active {
+            .fa-check {
+                display: initial;
+            }
+        }
+
+    }
+}
+
+#noteContainer {
+    display: flex;
+    position: relative;
+    flex-basis: calc((2/3)*100%);
+    background-color: white;
+    padding: 20px;
+    overflow: hidden;
+
+    #alert {
+        position: absolute;
+        top: -75px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        border: 1px solid #e3e3e3;
+        border-top: 0px;
+        padding: 10px;
+        width: 150px;
+        animation-name: alertWarningReturn;
+        animation-duration: 200ms;
+
+        &.warning {
+            color: #dc3545;
+            border-color: #dc3545;
+            box-shadow: 0px 0px 2px 1px #dc3545;
+            background-color: white;
+            animation-name: alertWarning;
+            animation-duration: 200ms;
+            top: 0px;
+        }
+    }
+
+    >div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        textarea {
+            resize: none;
+        }
+
+        .title-container {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        #title {
+            display: flex;
+            flex-basis: 100%;
+            font-size: 1.3rem;
+            padding: 10px 20px;
+            max-height: 67px;
+            border-color: #e3e3e3;
+
+            &:disabled {
+                background-color: #fcfcfc;
+            }
+        }
+
+        #save,
+        #edit,
+        #date {
+            display: flex;
+            flex-basis: 70px;
+            flex-shrink: 1;
+            font-size: 2rem;
+            height: 67px;
+            align-items: center;
+            justify-content: center;
+            background-color: #e3e3e3;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #efefef;
+            }
+
+        }
+
+        #date {
+            display: flex;
+            margin-bottom: 40px;
+
+            &.active {
+                background-color: white;
+                border: 1px solid #e3e3e3;
+                cursor: auto;
+            }
+        }
+
+        #charactersLeft {
+            position: absolute;
+            right: 0px;
+            top: 67px;
+        }
+
+        #displayDate {
+            display: flex;
+            flex-basis: 70px;
+            flex-shrink: 1;
+            font-size: 1.25rem;
+            height: 67px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+
+            background-color: #fcfcfc;
+            border: 1px solid #e3e3e3;
+
+
+        }
+
+        #content {
+            display: flex;
+            flex-basis: 100%;
+            flex: 1 1 auto;
+            font-size: 1.05rem;
+            padding: 10px 20px;
+            border-color: #e3e3e3;
+
+            &:disabled {
+                background-color: #fcfcfc;
+            }
+        }
+
+        .warning {
+            border-color: #dc3545;
+            box-shadow: 0px 0px 2px 1px #dc3545;
+        }
+    }
+}
+
+#backToList {
+    display: none;
+}
+
+//Settings View
+#settingsContainer{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+
+    #settings{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        height: 60%;
+        padding: 20px;
+        padding-bottom: 60px; 
+        background-color: white;
+
+        > *{
+            display: flex;
+            // flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        .alerts{
+            h3{
+                flex-basis: 100%;
+                line-height: 2em;
+            }
+            label{
+                flex-basis: 25%;
+            }
+            input{
+                flex-basis: 25%;
+                margin-bottom: 10px;
+                margin-right: 50%;
+            }
+        } 
+
+        #saveSettings{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 35px;
+            background-color: #e3e3e3;
+            cursor: pointer;
+        }
+        #cancelSettings{
+            position: absolute;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75em;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: #e3e3e3;
+            cursor: pointer;
+        }
+    }
+}
+
+//Mobile View
+@media (max-width: 768px) {
+    #reminderListContainer {
+        flex-basis: 0%;
+        overflow: hidden;
+        padding: 0px;
+        border-right: 0px;
+        transition: padding ease 200ms;
+        transition: flex-basis ease 200ms;
+
+        &.focused {
+            flex-basis: 100%;
+            padding: 20px;
+        }
+    }
+
+    #noteContainer {
+        flex-basis: 0%;
+        padding: 0px;
+        transition: padding ease 200ms;
+        transition: flex-basis ease 200ms;
+
+        &.focused {
+            flex-basis: 100%;
+            padding: 20px;
+        }
+    }
+
+    #backToList {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        opacity: 0;
+        display: none;
+        background-color: #e3e3e3;
+        width: 100px;
+        height: 100px;
+        border-top-right-radius: 100px;
+        justify-content: flex-start;
+        align-items: flex-end;
+
+        transition: opacity 200ms ease;
+        animation-delay: 2000ms;
+        animation-name: backToListActive;
+
+        &.active {
+            opacity: 1;
+            display: flex;
+            animation-delay: 2000ms;
+            animation-name: backToList;
+        }
+
+        >i {
+            margin: 15px;
+        }
+
+    }
+
+}
+
+
+//Animiations
+@keyframes alertWarning {
+    from {
+        top: -75px;
+        color: #dc3545;
+    }
+
+    to {
+        top: 0px;
+        color: #dc3545;
+    }
+}
+
+@keyframes alertWarningReturn {
+    from {
+        top: 0px;
+        color: #dc3545;
+    }
+
+    to {
+        top: -75px;
+        color: #dc3545;
+    }
+}
+
+@keyframes backToList {
+    from {
+        display: none;
+    }
+
+    to {
+        display: flex;
+    }
+}
+
+@keyframes backToListActive {
+    from {
+        display: flex;
+    }
+
+    to {
+        display: none;
+    }
+}
